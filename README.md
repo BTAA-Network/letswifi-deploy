@@ -33,7 +33,7 @@ and to all the other contributors
 
 ## License
 
-BSD-3-Clause License
+    Let's WiFi Portal Instructions  © 2026 by Neil Johnson is licensed under Creative Commons Attribution-ShareAlike 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
 
 ## Project status
 
