@@ -1,4 +1,4 @@
-# LetsWiFi1 Deployment Instructions
+# LetsWiFi Deployment Instructions
 
 ## Name
 
