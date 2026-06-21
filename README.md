@@ -5,6 +5,7 @@
 This guide describes how to adopt and operate a locally hosted wireless onboarding solution using the LetsWiFi portal integrated with institutional identity systems.
 
 This approach enables institutions to:
+
 - Support **secure wireless onboarding (EAP-TLS)**
 - Integrate with existing **SAML-based identity providers**
 - Reduce reliance on commercial onboarding/licensing solutions
@@ -15,12 +16,14 @@ This approach enables institutions to:
 ## 2. Problem This Solves
 
 Many institutions face challenges with:
+
 - Complex user onboarding for secure wireless (eduroam/EAP-TLS)
 - High licensing costs for proprietary onboarding systems
 - Fragmented identity and certificate workflows
 - Limited flexibility in managing onboarding experience
 
 This solution provides:
+
 - A **standards-based, identity-driven onboarding model**
 - Centralized control using existing IAM infrastructure
 - A **cost-effective alternative** to commercial platforms
@@ -51,7 +54,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ### Core Components
 
 | Component | Purpose |
-|----------|--------|
+| ---------- | -------- |
 | LetsWiFi Portal | User onboarding interface and configuration distribution |
 | Apache / PHP | Web platform hosting the portal |
 | SimpleSAMLphp | Integration with institutional identity |
@@ -65,12 +68,14 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ## 4. Prerequisites
 
 ### Technical Capabilities
+
 - Linux-based server hosting
 - Apache / PHP support
 - Database capability (SQLite, MySQL, or MariaDB)
 - PKI / certificate management capability
 
 ### Organizational Dependencies
+
 - Access to Identity and Access Management (IAM) team  
 - Ability to integrate with SAML IdP  
 - Coordination between:
@@ -83,6 +88,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ## 5. Adoption Model
 
 ### Phase 1 – Evaluation
+
 - Validate compatibility with:
   - IAM system (SAML)
   - Wireless authentication (EAP-TLS)
@@ -92,6 +98,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ---
 
 ### Phase 2 – Pilot Deployment
+
 - Deploy portal in a non-production or limited scope environment
 - Integrate with IAM (SAML metadata exchange)
 - Configure a test realm
@@ -103,6 +110,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ---
 
 ### Phase 3 – Initial Production Rollout
+
 - Deploy production instance
 - Begin onboarding select user groups
 - Monitor:
@@ -113,6 +121,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ---
 
 ### Phase 4 – Full Adoption
+
 - Expand to full campus or organizational use
 - Transition from legacy onboarding methods
 - Normalize support processes
@@ -124,7 +133,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ### Ownership Model
 
 | Area | Recommended Owner |
-|------|------------------|
+| ------ | ------------------ |
 | Linux / Web Server | Server / Infrastructure team |
 | Portal Application | Network / Engineering |
 | Identity Integration (SAML) | IAM team |
@@ -134,12 +143,15 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ---
 
 ### Day-to-Day Operations
+
 - Monitor service availability (portal + authentication)
 - Support user onboarding issues
 - Maintain configuration (realms, clients, contact info)
 
 ---
+
 ### Maintenance Activities
+
 - OS patching (server team)
 - Certificate lifecycle management (PKI/IAM)
 - SAML metadata updates (IAM)
@@ -150,7 +162,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ### Common Failure Scenarios
 
 | Issue | Likely Area | Action |
-|------|------------|-------|
+| ------ | ------------ | ------- |
 | SAML login fails | IAM / SAML config | Verify metadata, IdP configuration |
 | Portal unavailable | Server | Check Apache, system health |
 | Certificates not issued | PKI / config | Verify CA configuration and trust chain |
@@ -159,6 +171,7 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ---
 
 ### Escalation Boundaries
+
 - Operations handles:
   - Standard onboarding issues  
   - Service availability  
@@ -186,15 +199,18 @@ A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
 ## 8. Benefits & Impact
 
 ### Operational Benefits
+
 - Reduced reliance on proprietary onboarding tools  
 - Improved consistency in onboarding process  
 - Greater flexibility in customization  
 
 ### Security Benefits
+
 - Strong authentication using EAP-TLS  
 - Integration with institutional identity policies  
 
 ### Cost Benefits
+
 - Potential reduction in annual licensing costs  
 - Leverages existing infrastructure investments  
 
