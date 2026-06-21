@@ -31,6 +31,23 @@ This solution provides:
 
 ### System Overview
 
+```mermaid
+flowchart TD
+
+A[User Device\nLaptop / Phone] -->|HTTPS| B[LetsWiFi Portal\nApache / PHP]
+
+B -->|SAML Auth Request| C[SimpleSAMLphp\nService Provider]
+
+C -->|Redirect / Auth| D[Identity Provider\nShibboleth / Azure AD]
+
+D -->|Auth Response| C
+C -->|Validated Assertion| B
+
+B -->|Generate Cert & Config| A
+
+A -->|802.1X EAP-TLS| E[Wireless Network\nRADIUS / Controllers]
+```
+
 ### Core Components
 
 | Component | Purpose |
