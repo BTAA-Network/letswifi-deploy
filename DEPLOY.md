@@ -25,9 +25,13 @@
     - [Edit letswifi configuration files](#edit-letswifi-configuration-files)
     - [Configure Clients](#configure-clients)
     - [Setup database](#setup-database)
+      - [SQLite](#sqlite)
+      - [MySQL/MariaDB](#mysqlmariadb)
     - [Setup Realms](#setup-realms)
   - [Load RADIUS Certificate](#load-radius-certificate)
   - [Create Realm](#create-realm)
+    - [Run command to create realm](#run-command-to-create-realm)
+    - [Edit `config/realms/example.edu.php`](#edit-configrealmsexampleeduphp)
   - [Set file ownership to web server user](#set-file-ownership-to-web-server-user)
   - [Setting contact information Logo's etc](#setting-contact-information-logos-etc)
 
@@ -220,6 +224,8 @@ cp config-dist/clients-eduroam.conf.php conifg/clients.conf.php
 
 ### Setup database
 
+#### SQLite
+
 For testing we are using a flat sqlite3 database, In production you will probably want to use MySQL or MariaDB.
 
 ```bash
@@ -230,6 +236,43 @@ sqlite3 var/letswifi.sqlite < sql/letswifi.sqlite.sql
 ```
 
 Edit `config/database.conf.php` and remove leading '/' from `/var`
+
+#### MySQL/MariaDB
+
+- Install MySQL or MariaDB
+- Login into the database as root
+  
+```text
+  
+-- 1. Create the schema
+CREATE DATABASE myschema;
+
+-- 2. Create the user
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'strongpassword';
+
+-- 3. Grant full read/write access to that schema
+GRANT ALL PRIVILEGES ON myschema.* TO 'myuser'@'localhost';
+
+-- 4. Apply the changes
+FLUSH PRIVILEGES;
+```
+
+- Load initial setup from `sql/letswifi.mysql.sql`
+
+```text
+mysql -u <db_username> -p <schema> < sql/letswifi.mysql.sql>
+```
+
+Edit `config/database.conf.php` and change to:
+
+```php
+return [
+        # 'dsn' => 'sqlite:' . \dirname( __DIR__ ) . '/var/letswifi.sqlite',
+        'dsn' => 'mysql:host=localhost;dbname=letswifi;charset=utf8mb4',
+        'username' => '<db_username>',
+        'password' => '<db_passwd>',
+];
+```
 
 ### Setup Realms
 
@@ -267,6 +310,8 @@ For example (using Incommon certificates)
 
 ## Create Realm
 
+### Run command to create realm
+
 ```bash
 bin/letswifi realm example.edu \
 --newca 'Example CA' \
@@ -275,6 +320,29 @@ Services' --server-name 'radius-server.example.edu'
 ```
 
 This will generate the key and certificate used to sign the EAP-TLS client certificates. The Certificate will be placed in `config/certs`
+
+### Edit `config/realms/example.edu.php`
+
+```php
+<?php return [
+        'validity' => 400,
+        'server_names' => ['radius-certname.example.edu'],
+        'display_name' => [
+                'en-GB' => 'example.edu',
+        ],
+        'description' => [ 'en-GB' => 'Configures your device for eduroam using EAP-TLS certificates'],
+        'networks' => ['eduroam'],
+        'contact' => 'ITSHelpDesk',
+        'signer' => 'CN=Example LetsWifi CA',
+        'trust' => [
+                'C=US, O=Internet2, CN=InCommon RSA Server CA 2',
+                'C=US, ST=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust RSA Certification Authority',
+        ],
+        'logo' => [
+                'data#file' => 'Example_logo.svg',
+        ],
+];
+```
 
 ## Set file ownership to web server user
 
