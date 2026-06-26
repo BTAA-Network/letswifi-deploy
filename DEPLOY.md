@@ -19,7 +19,7 @@
     - [Edit `simplesamlphp/config/config.php`](#edit-simplesamlphpconfigconfigphp)
     - [Generate self signed certificate for simplesamlphp](#generate-self-signed-certificate-for-simplesamlphp)
     - [Edit `simplesamlphp/config/authsources.php`](#edit-simplesamlphpconfigauthsourcesphp)
-    - [Geneate Configuration for IAM Metadate file](#geneate-configuration-for-iam-metadate-file)
+    - [Geneate Configuration for IAM Metadata file](#geneate-configuration-for-iam-metadata-file)
   - [Configure letswifi portal](#configure-letswifi-portal)
     - [Set oauth Secret](#set-oauth-secret)
     - [Edit letswifi configuration files](#edit-letswifi-configuration-files)
@@ -56,7 +56,7 @@
 
 ### Obtain SSL certs for web server
 
-(**TODO: Point repo for gennerating certificates**)
+(**TODO: Point repo for generating certificates**)
 
 ### Configure Server
 
@@ -109,7 +109,7 @@ cd letswifi-portal
 composer --no-dev --quiet install
 ```
 
-**NOTE**: From here on out all commands are relaitive to the `/var/www/html/letswifi-portal` directory
+**NOTE**: From here on out all commands are relative to the `/var/www/html/letswifi-portal` directory
 
 ## Install and config simplesamlphp
 
@@ -152,7 +152,7 @@ Provide the certificate (`.crt`) file to your Identity and Access Management Tea
 
 ### Edit `simplesamlphp/config/authsources.php`
 
-Top of the file should looklike:
+Top of the file should look like:
 
 ```php
     // An authentication source which can authenticate against SAML 2.0 IdPs.
@@ -171,7 +171,7 @@ Top of the file should looklike:
 ...
 ```
 
-### Geneate Configuration for IAM Metadate file
+### Geneate Configuration for IAM Metadata file
 
 Goto [https://www.example.edu/simplesaml/admin](https://www.example.edu/simplesaml/admin)
 
@@ -274,9 +274,9 @@ bin/letswifi realm example.edu \
 Services' --server-name 'radius-server.example.edu'
 ```
 
-This will geneate the key and certificate used to sign the EAP-TLS client certificates. The Certificate will be placed in `config/certs`
+This will generate the key and certificate used to sign the EAP-TLS client certificates. The Certificate will be placed in `config/certs`
 
-## Set file ownership to web server user 
+## Set file ownership to web server user
 
 (www-data for ubuntu)
 
