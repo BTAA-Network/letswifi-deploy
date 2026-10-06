@@ -162,7 +162,7 @@ cp simplesamlphp/config/config.php.dist simplesaml/config/config.php
 - Set `admin.protectmetadata` to `true`
 
 ```bash
-cp cp simplesamlphp/config/authsources.php.dist simplesamlphp/config/authsources.php
+cp simplesamlphp/config/authsources.php.dist simplesamlphp/config/authsources.php
 ```
 
 ### Generate self signed certificate for simplesamlphp
