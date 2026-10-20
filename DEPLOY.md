@@ -23,7 +23,7 @@
     - [Edit `simplesamlphp/config/config.php`](#edit-simplesamlphpconfigconfigphp)
     - [Generate self signed certificate for simplesamlphp](#generate-self-signed-certificate-for-simplesamlphp)
     - [Edit `simplesamlphp/config/authsources.php`](#edit-simplesamlphpconfigauthsourcesphp)
-    - [Geneate Configuration for IAM Metadata file](#geneate-configuration-for-iam-metadata-file)
+    - [Generate Configuration for IAM Metadata file](#genreate-configuration-for-iam-metadata-file)
   - [Configure letswifi portal](#configure-letswifi-portal)
     - [Set oauth Secret](#set-oauth-secret)
     - [Edit letswifi configuration files](#edit-letswifi-configuration-files)
@@ -162,7 +162,7 @@ cp simplesamlphp/config/config.php.dist simplesaml/config/config.php
 - Set `admin.protectmetadata` to `true`
 
 ```bash
-cp cp simplesamlphp/config/authsources.php.dist simplesamlphp/config/authsources.php
+cp simplesamlphp/config/authsources.php.dist simplesamlphp/config/authsources.php
 ```
 
 ### Generate self signed certificate for simplesamlphp
@@ -182,6 +182,7 @@ Provide the certificate (`.crt`) file to your Identity and Access Management Tea
 Top of the file should look like:
 
 ```php
+<?php
     // An authentication source which can authenticate against SAML 2.0 IdPs.
     'default-sp' => [
         'saml:SP',
@@ -198,7 +199,7 @@ Top of the file should look like:
 ...
 ```
 
-### Geneate Configuration for IAM Metadata file
+### Generate Configuration for IAM Metadata file
 
 Goto [https://www.example.edu/simplesaml/admin](https://www.example.edu/simplesaml/admin)
 
@@ -210,7 +211,7 @@ Load in the XML Metadata file from your IAM team, Click `Parse`
 
 Copy generated PHP code to the file `simplesamlphp/metadata/saml20-idp-remote.php`
 
-Edot `/var/www/htdocs/html/letswifi-portal/simplesamlphp/authsources.php
+Edit `/var/www/htdocs/html/letswifi-portal/simplesamlphp/authsources.php
 
 Add `        'sign.logout' => true,` under `entityID`
 
@@ -246,7 +247,7 @@ Under default provider
 This will create points to the various windows, iOS, Android, and Linux configuration apps.
 
 ```bash
-cp config-dist/clients-eduroam.conf.php conifg/clients.conf.php
+cp config-dist/clients-eduroam.conf.php config/clients.conf.php
 ```
 
 ### Setup database
@@ -272,7 +273,7 @@ Edit `config/database.conf.php` and remove leading '/' from `/var`
 ```text
   
 -- 1. Create the schema
-CREATE DATABASE myschema;
+CREATE DATABASE letswifi;
 
 -- 2. Create the user
 CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'strongpassword';
@@ -293,12 +294,14 @@ mysql -u <db_username> -p <schema> < sql/letswifi.mysql.sql>
 Edit `config/database.conf.php` and change to:
 
 ```php
+<?php
 return [
         # 'dsn' => 'sqlite:' . \dirname( __DIR__ ) . '/var/letswifi.sqlite',
         'dsn' => 'mysql:host=localhost;dbname=letswifi;charset=utf8mb4',
         'username' => '<db_username>',
         'password' => '<db_passwd>',
 ];
+>
 ```
 
 ### Setup Realms
